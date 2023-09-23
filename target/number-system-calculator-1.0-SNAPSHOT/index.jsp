@@ -2,11 +2,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>JSP - Hello World</title>
+  <title>Number system calculator</title>
 </head>
 <body>
-<h1><%= "Hello World!" %></h1>
+<%--<h1><%= "Hello World! Blaise" %></h1>--%>
 <br/>
-<a href="hello-servlet">Hello Servlet</a>
+<a href="www.igihe.com">Hello Servlet</a>
+
 </body>
 </html>
