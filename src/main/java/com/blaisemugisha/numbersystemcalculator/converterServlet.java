@@ -3,6 +3,8 @@ package com.blaisemugisha.numbersystemcalculator;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
@@ -10,43 +12,43 @@ import java.io.IOException;
 import java.io.*;
 
 
-@WebServlet(urlPatterns = "/app")
-public class converterServlet extends HttpServlet {
+//@WebServlet()
+public class converterServlet extends HttpServlet{
 
-protected void doPost(HttpServlet request,HttpServlet response) throws ServletException, IOException {
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+String decimalString=request.getParameter("decimalNumber");
 
-    String decimalNumber=request.getInitParameter("decimalNumber");
-
+    // Initialize the result variables
+    String conversionType = request.getParameter("conversionType");
+    String result = "";
     try{
         // Parse the decimal string to an integer
-        int decimal = Integer.parseInt(decimalNumber);
+        int decimal = Integer.parseInt(decimalString);
 
-        // Convert to binary, octal, and hexadecimal
-        String binary = Integer.toBinaryString(decimal);
-        String octal = Integer.toOctalString(decimal);
-        String hexadecimal = Integer.toHexString(decimal);
-
-        // Set the response content type and write the results
-//        response.setContentType("text/html");
-//        PrintWriter out=new PrintWriter("text/html");
-//        out.println("<html><body>");
-//        out.println("<h1>Number Conversion Results</h1>");
-//        out.println("<p>Decimal: " + decimal + "</p>");
-//        out.println("<p>Binary: " + binary + "</p>");
-//        out.println("<p>Octal: " + octal + "</p>");
-//        out.println("<p>Hexadecimal: " + hexadecimal + "</p>");
-//        out.println("</body></html>");
+        // Perform the conversion based on the selected button
+        switch (conversionType) {
+            case "Binary":
+                result = Integer.toBinaryString(decimal);
+                break;
+            case "Hexadecimal":
+                result = Integer.toHexString(decimal).toUpperCase();
+                break;
+            case "Octal":
+                result = Integer.toOctalString(decimal);
+                break;
+            case "Refresh":
+                result = ""; // Clear the result
+                break;
+            default:
+                result = "Invalid conversion type"; // Handle unsupported conversion type
+        }
 
 
     }catch (NumberFormatException e){
         // Handle invalid input
-//        response.setContentType("text/html");
+        request.setAttribute("error", "Invalid input. Please enter a valid decimal number.");
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
 
-        PrintWriter out = new PrintWriter("text/html");
-        out.println("<html><body>");
-        out.println("<h1>Error</h1>");
-        out.println("<p>Invalid input. Please enter a valid decimal number.</p>");
-        out.println("</body></html>");
     }
 
 
