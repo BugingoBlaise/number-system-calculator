@@ -6,8 +6,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
-@WebServlet(name = "Converter", value = "/Converter")
-public class Converter extends HttpServlet {
+@WebServlet(name = "ConverterServlet", value = "/ConverterServlet")
+public class ConverterServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
@@ -46,6 +46,7 @@ public class Converter extends HttpServlet {
 
     public static String convertToHexadecimal(int decimalNumber) {
         return Integer.toHexString(decimalNumber);
+
     }
 
     public static String convertToOctal(int decimalNumber) {

@@ -24,10 +24,14 @@
   <h3>Result: ${result}</h3>
 </div>
 
+
 <div>
   <ul>
     <li style="color: cornflowerblue">${message}</li>
   </ul>
+</div>
+<div>
+  <a href="registration.jsp">Click here to register</a>
 </div>
 <script>
   function setConversionType(type) {
